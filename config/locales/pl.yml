@@ -1,0 +1,225 @@
+# encoding: utf-8
+pl:
+  # -- Models ---------------------------------------------------------------
+  attributes:
+    label: Etykieta
+    slug: Slug
+    parent_id: Rodzic
+    content: Treść
+  activerecord:
+    models:
+      cms/site: Strona
+      cms/layout: Layout
+      cms/page: Podstrona
+      cms/snippet: Fragment
+    attributes:
+      cms/site:
+        hostname: Nazwa hosta
+        path: Ścieżka
+        locale: Język
+        is_mirrored: Posiada kopię (mirror)
+      cms/layout:
+        label: Nazwa Layoutu
+        app_layout: Plik layoutu
+        parent_id: Rodzic
+        css: Styl CSS
+        js: Javascript
+      cms/page:
+        label: Etykieta
+        layout_id: Layout
+        slug: Slug
+        target_page_id: Przekierowanie do
+        is_published: Opublikowane
+        
+  # -- Controllers ----------------------------------------------------------
+  cms:
+    base:
+      site_not_found: Nie znaleziono strony
+      fixtures_enabled: CMS Fixtures są włączone. Bieżące zmiany zostaną odrzucone.
+      
+    sites:
+      created: Strona została utworzona
+      creation_failure: Nie udało się utworzyć strony
+      updated: Strona została zaktualizowana
+      update_failure: Nie udało się zaktualizować strony
+      deleted: Strona została usunięta
+      not_found: Strona nie została znaleziona
+      
+    layouts:
+      created: Layout został utworzony
+      creation_failure: Nie udało się utworzyć layoutu
+      updated: Layout został zaktualizowany
+      update_failure: Nie udało się zaktualizować layoutu
+      deleted: Layout został usunięty
+      not_found: Layout nie został znaleziony
+      
+    pages:
+      created: Podstrona została utworzona
+      creation_failure: Nie udało się utworzyć podstrony
+      updated: Podstrona została zaktualizowana
+      update_failure: Nie udało się zaktualizować podstrony
+      deleted: Podstrona została usunięta
+      not_found: Podstrona nie została znaleziona
+      layout_not_found: Nie znaleziono Layoutu. Proszę utworzyć Layout.
+      
+    snippets:
+      created: Fragment został utworzony
+      creation_failure: Nie udało się utworzyć fragmentu
+      updated: Fragment został zaktualizowany
+      update_failure: Nie udało się zaktualizować fragmentu
+      deleted: Fragment został usunięty
+      not_found: Nie znaleziono fragmentu
+      
+    revisions:
+      reverted: Przywrócono poprzednią wersję
+      record_not_found: Nie znaleziono obiektu
+      not_found: Nie znaleziono rewizji
+      
+    files:
+      created: Plik został zapisany
+      creation_failure: Nie udało się wgra pliku
+      updated: Plik został zaktualizowany
+      update_failure: Nie udało się zaktualizować pliku
+      deleted: Plik został usunięty
+      not_found: Nie znaleziono pliku
+      
+    content:
+      site_not_found: Nie znaleziono strony
+      layout_not_found: Nie znaleziono layoutu
+      page_not_found: Nie znaleziono strony
+  
+  # -- Views ----------------------------------------------------------------
+  cms_admin:
+    base:
+      sites: Strony
+      layouts: Layouty
+      pages: Podstrony
+      snippets: Fragmenty
+      files: Pliki
+      
+    sites:
+      index:
+        title: Strony
+        new_link: Utwórz nową stronę
+        select: Wybierz stronę
+        edit: Edytuj stronę
+        delete: Usuń stronę
+        are_you_sure: Czy na pewno chcesz usunąć wybraną stronę?
+      new:
+        title: Nowa strona
+      edit:
+        title: Edycja strony
+      form:
+        create: Nowa strona
+        update: Edycja strony
+        
+    layouts:
+      index:
+        title: Layouty
+        new_link: Utwórz nowy layout
+      index_branch:
+        add_child_layout: Dodaj podrzędny layout
+        edit: Edytuj
+        delete: Usuń
+        are_you_sure: Czy na pewno chcesz wykonać tę akcję?
+      new:
+        title: Nowy layout
+      edit:
+        title: Edycja layoutu
+        revision: Rewizja
+      form:
+        select_parent_layout: Wybierz layout nadrzędny
+        select_app_layout: Wybierz layout aplikacji
+        create: Nowy layout
+        update: Edycja layoutu
+      
+    pages:
+      index:
+        title: Podstrony
+        new_link: Utwórz nową podstronę
+      index_branch:
+        toggle: Przełącz
+        add_child_page: Dodaj podstronę podrzędną
+        edit: Edytuj
+        delete: Usuń
+        are_you_sure: Czy na pewno chcesz wykonać tę akcję?
+      new:
+        title: Nowa podstrona
+      edit:
+        title: Edycja podstrony
+        revision: Rewizja
+      form:
+        select_target_page: Brak przekierowania
+        preview: Podgląd
+        create: Nowa podstrona
+        update: Edycja podstrony
+      form_blocks:
+        no_tags: |-
+          Layout nie posiada tagów z treścią.<br/>
+          Edytuj treść poprzez dodanie podstrony lub dodaj tag z treścią. Przykład: <code>{{cms:page:content}}</code>
+      
+    snippets:
+      index:
+        title: Fragmenty
+        new_link: Utwórz nowy fragment
+        edit: Edytuj
+        delete: Usuń
+        are_you_sure: Czy na pewno chcesz wykonać tę akcję?
+      new:
+        title: Nowy fragment
+      edit:
+        title: Edycja fragmentu
+        revision: Rewizja
+      form:
+        create: Nowy fragment
+        update: Edycja fragmentu
+          
+    revisions:
+      show:
+        title: Rewizje dla
+        revision: Rewizja
+        full_path: Pełna ścieżka
+        slug: Slug
+        update: Zaktualizuj do bieżącej rewizji
+      
+    files:
+      index:
+        title: Pliki
+        new_link: Wgraj nowy plik
+        edit: Zmień
+        delete: Usuń
+        are_you_sure: Czy na pewno chcesz wykonać tę akcję?
+        button: Wgraj plik
+      new:
+        title: Nowy plik
+      edit:
+        title: Zmiana pliku
+      form:
+        current_file: Bieżący plik
+        create: Wgraj plik
+        update: Wgraj plik
+      page_form:
+        are_you_sure: Czy na pewno chcesz wykonać tę akcję?
+      file:
+        are_you_sure: Czy na pewno chcesz wykonać tę akcję?
+        
+    categories:
+      index:
+        label: Kategorie
+        edit: Edytuj
+        done: Zapisz
+        all: Wszystko
+        add: Dodaj
+      show:
+        are_you_sure: Czy na pewno chcesz wykonać tę akcję?
+      edit:
+        save: Zapisz
+      form:
+        label: Kategorie
+        
+    dialogs:
+      image:
+        insert: Wstaw obrazek
+      link:
+        create: Utwórz odnośnik
+      
